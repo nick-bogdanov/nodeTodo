@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var controller = require('../controllers/account');
+var controller = require('../controllers/_account');
 
 router.get('/', function(req, res, next) {
   res.json('form');

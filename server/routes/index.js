@@ -10,5 +10,4 @@ router.get('/views/:name', function(req, res) {
   res.render(req.params.name);
 });
 
-
 module.exports = router;
