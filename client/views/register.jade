@@ -1,0 +1,21 @@
+.col-sm-4.col-sm-offset-4
+   form(name='registerForm', method='POST', ng-submit='registerUser(registerForm.$valid)', novalidate)
+      .form-group(ng-class='{"has-error": registerForm.name.$invalid && !registerForm.name.$untouched}')
+         label Name
+         input(name='name', ng-model='userName', required, placeholder='Username', ng-minlength='2').form-control
+         p.help-block(ng-if='registerForm.name.$error.minlength && !registerForm.name.$untouched') You name is too short.
+
+      .form-group(ng-class='{"has-error": registerForm.email.$invalid && !registerForm.email.$untouched}')
+         label Email
+         input(name='email', ng-model='userEmail', type='email', required, placeholder='Email').form-control
+         p.help-block(ng-if='registerForm.email.$invalid && !registerForm.email.$untouched') Enter valid email.
+
+      .form-group(ng-class='{"has-error": registerForm.password.$invalid && !registerForm.password.$untouched}')
+         label Password
+         input(name='password', ng-model='userPass', type='password', required, placeholder='Password', ng-minlength='5').form-control
+         p.help-block.text-danger(ng-if='registerForm.password.$error.minlength && !registerForm.password.$untouched')
+            | Your password too short. Minimum 5 symbols.
+
+      .form-group
+         input(type='submit', ng-disabled="registerForm.$invalid").form-control.btn.btn-primary
+

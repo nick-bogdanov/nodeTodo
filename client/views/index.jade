@@ -1,0 +1,26 @@
+doctype html
+html(ng-app='todo')
+  head
+    title MEAN STACK
+    meta(content="text/html; charset=UTF-8")
+    link(rel='stylesheet', href='components/bootstrap/dist/css/bootstrap.min.css')
+  body
+    main.container
+      div.row
+        nav.navbar.navbar-default
+          div.container-fluid
+            .navbar-collapse.collapse
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a(href='#login') Login
+                li
+                  a(href='#register') Register
+        section(ng-view)
+
+    script(type="text/javascript", src='components/angular/angular.min.js')
+    script(type="text/javascript", src='components/angular-route/angular-route.min.js')
+    //script(type="text/javascript", src='components/angular-route-segment/build/angular-route-segment.js')
+    script(type="text/javascript", src='scripts/app.js')
+    script(type="text/javascript", src='scripts/controllers.js')
+    script(type="text/javascript", src='scripts/accountControllers.js')
+    script(type="text/javascript", src='scripts/servicesAccount.js')

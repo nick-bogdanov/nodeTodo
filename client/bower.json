@@ -1,0 +1,26 @@
+{
+  "name": "nodeToDo",
+  "version": "0.0.0",
+  "homepage": "https://github.com/nick-bogdanov/nodeTodo",
+  "authors": [
+    "Nick <kol9dyn4ek@gmail.com>"
+  ],
+  "description": "web client",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  },
+  "devDependencies": {
+    "angular-route-segment": "~1.5.0",
+    "angular-route": "~1.4.7"
+  }
+}
