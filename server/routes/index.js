@@ -1,13 +1,14 @@
-var express = require('express');
-var router = express.Router();
+var users = require('../api/account');
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index');
-});
+module.exports = function(app) {
+  app.get('/', function(req, res) {
+    res.render('index');
+  });
 
-router.get('/views/:name', function(req, res) {
-  res.render(req.params.name);
-});
+  app.get('/views/:name', function(req, res) {
+    res.render(req.params.name);
+  });
 
-module.exports = router;
+  app.use('/api/users', users);
+
+};
