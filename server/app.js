@@ -11,6 +11,14 @@ var app = express();
 
 mongoose.connect(config.get('db'));
 
+//mongoose.connection.on('error', function(err) {
+//  console.log(err);
+//});
+//
+//mongoose.connection.on('open', function(data) {
+//  console.log(data);
+//});
+
 // view engine setup
 app.set('views', path.join(__dirname, config.get('public.views')));
 app.set('view engine', config.get('app.viewEngine'));

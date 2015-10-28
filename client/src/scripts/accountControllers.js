@@ -9,11 +9,13 @@
           userPass: $scope.userPass
         };
 
+        $scope.error = null;
+
         users.createUser(data).then(function(res) {
-          console.log(res);
-        }).catch(function(err) {
-          console.log(err);
-        })
+          if (!res.success) {
+            $scope.error = res.extras.message;
+          }
+        });
 
       }
     }

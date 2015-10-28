@@ -16,6 +16,9 @@
          p.help-block.text-danger(ng-if='registerForm.password.$error.minlength && !registerForm.password.$untouched')
             | Your password too short. Minimum 5 symbols.
 
+      .alert.alert-danger(ng-if='error')
+         | {{error}}
+
       .form-group
          input(type='submit', ng-disabled="registerForm.$invalid").form-control.btn.btn-primary
 
