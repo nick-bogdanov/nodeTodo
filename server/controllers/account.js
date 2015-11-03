@@ -1,54 +1,74 @@
-var AccountController = function() {
-  this.UserProfileModel = require('../models/user');
-  this.ApiResponse = require('../models/api-response.js');
-  this.ApiMessages = require('../models/api-messages.js');
-};
+var express = require('express');
+var router = express.Router();
 
-AccountController.prototype.createUser = function(newUser, callback) {
-  var _this = this;
+var UserProfileModel = require('../models/user');
+var ApiResponse = require('../models/api-response.js');
+var ApiMessages = require('../models/api-messages.js');
 
-  this.UserProfileModel.findOne({"email": newUser.userEmail}, {}, function(err, user) {
+//var response = new ApiResponse;
+//var message = new ApiMessages;
+//console.log(response);
 
-    if (err) {
-      return callback(err, new _this.ApiResponse({success: false, extras: {message: _this.ApiMessages.DB_ERROR}}));
+router.post('/create', function(req, res) {
+  var userName = req.body.userName;
+  var userEmail = req.body.userEmail;
+  var userPass = req.body.userPass;
+
+  UserProfileModel.findOne({"email": userEmail}).then(function(data) {
+    // user exists
+    if (data) {
+      console.warn('email already exist');
+      res.json(new ApiResponse({
+        success: false,
+        extras: {
+          message: new ApiMessages().EMAIL_ALREADY_EXISTS
+        }
+      }));
     }
+    // try to create user
 
-    if (user) {
-      return callback(err, new _this.ApiResponse({success: false, extras: {message: _this.ApiMessages.EMAIL_ALREADY_EXISTS}}));
-    }else{
-      var userModel = new _this.UserProfileModel({
-        username: newUser.userName,
-        email: newUser.userEmail,
-        created_at: Date.now(),
-        updated_at: Date.now()
+    if (!data) {
+
+      var user = UserProfileModel({
+        username: userName,
+        email: userEmail
       });
 
-      userModel.createHash(newUser.userPass);
+      user.createHash(userPass);
 
-      userModel.save(function(err, data, numberAffected) {
-
-        if (err) {
-          return callback(err, _this.ApiResponse({success: false, extras: {message: _this.ApiMessages.DB_ERROR}}));
-        }
-
-        if (numberAffected === 1) {
-
-          return callback(err, new _this.ApiResponse({
+      user.saveAsync().then(function(data) {
+        if (data) {
+          console.dir('user created');
+          res.json(new ApiResponse({
             success: true,
             extras: {
-              message: 'done'
+              message: 'User was created successful'
             }
           }));
         }else{
-          return callback(err, _this.ApiResponse({success: false, extras: {message: _this.ApiMessages.COULD_NOT_CREATE_USER}}));
+          console.error('could not create user');
+          res.json(new ApiResponse({
+            success: false,
+            extras: {
+              message: new ApiMessages().COULD_NOT_CREATE_USER
+            }
+          }));
         }
-
+      }).catch(function(err) {
+        console.err('error on adding user',err);
       });
-
     }
 
+  }).catch(function(err) {
+    res.json(new ApiResponse({
+      success: false,
+      extras: {
+        message: new ApiMessages().DB_ERROR
+      }
+    }));
   });
 
-};
 
-module.exports = AccountController;
+});
+
+module.exports = router;

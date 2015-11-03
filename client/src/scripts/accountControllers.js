@@ -12,6 +12,7 @@
         $scope.error = null;
 
         users.createUser(data).then(function(res) {
+          console.log(res);
           if (!res.success) {
             $scope.error = res.extras.message;
           }

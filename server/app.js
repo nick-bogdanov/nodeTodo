@@ -6,18 +6,20 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('config');
 var mongoose = require('mongoose');
+var Promise = require('bluebird');
 
 var app = express();
 
+Promise.promisifyAll(mongoose);
 mongoose.connect(config.get('db'));
 
-//mongoose.connection.on('error', function(err) {
-//  console.log(err);
-//});
-//
-//mongoose.connection.on('open', function(data) {
-//  console.log(data);
-//});
+mongoose.connection.on('error', function(err) {
+  console.log('mongoose error: ',err);
+});
+
+mongoose.connection.on('open', function(data) {
+  console.log('mongoose connect: ',data);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, config.get('public.views')));

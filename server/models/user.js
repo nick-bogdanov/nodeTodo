@@ -1,13 +1,17 @@
+var Promise = require('bluebird');
 var mongoose = require('mongoose');
+
+Promise.promisifyAll(mongoose);
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  email: {type: String, required: true, unique: true},
-  username: {type: String, required: true},
+  email: { type: String, required: true, unique: true} ,
+  username: { type: String, required: true },
   passwordHash: String,
   passwordSalt: String,
-  created_at: Date,
-  updated_at: Date
+  created_at: { type: Date, default: Date.now() },
+  updated_at: { type: Date, default: Date.now() },
+  active: { type: Boolean, default: false }
 });
 
 UserSchema.methods.createHash = function(pass) {

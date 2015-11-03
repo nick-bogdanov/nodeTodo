@@ -1,4 +1,4 @@
-var users = require('../api/account');
+var users = require('../controllers/account');
 
 module.exports = function(app) {
   app.get('/', function(req, res) {
