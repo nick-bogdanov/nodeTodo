@@ -1,4 +1,4 @@
-var ApiMessages = function () { };
+var ApiMessages = {};
 ApiMessages.EMAIL_NOT_FOUND = 0;
 ApiMessages.INVALID_PWD = 1;
 ApiMessages.DB_ERROR = 'Sorry. Some errors on server. Please try again later.';

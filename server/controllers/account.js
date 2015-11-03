@@ -2,12 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 var UserProfileModel = require('../models/user');
-var ApiResponse = require('../models/api-response.js');
-var ApiMessages = require('../models/api-messages.js');
+var ApiMessages = require('../models/api-messages');
+var ApiResponse = require('../models/api-response');
 
-//var response = new ApiResponse;
-//var message = new ApiMessages;
-//console.log(response);
+console.log('err', ApiMessages.EMAIL_ALREADY_EXISTS);
 
 router.post('/create', function(req, res) {
   var userName = req.body.userName;
@@ -15,18 +13,18 @@ router.post('/create', function(req, res) {
   var userPass = req.body.userPass;
 
   UserProfileModel.findOne({"email": userEmail}).then(function(data) {
-    // user exists
+
     if (data) {
       console.warn('email already exist');
       res.json(new ApiResponse({
         success: false,
         extras: {
-          message: new ApiMessages().EMAIL_ALREADY_EXISTS
+          message: ApiMessages.EMAIL_ALREADY_EXISTS
         }
       }));
     }
-    // try to create user
 
+    // try to create user
     if (!data) {
 
       var user = UserProfileModel({
@@ -50,7 +48,7 @@ router.post('/create', function(req, res) {
           res.json(new ApiResponse({
             success: false,
             extras: {
-              message: new ApiMessages().COULD_NOT_CREATE_USER
+              message: ApiMessages.COULD_NOT_CREATE_USER
             }
           }));
         }
@@ -60,10 +58,11 @@ router.post('/create', function(req, res) {
     }
 
   }).catch(function(err) {
+    console.log(err);
     res.json(new ApiResponse({
       success: false,
       extras: {
-        message: new ApiMessages().DB_ERROR
+        message: ApiMessages.DB_ERROR
       }
     }));
   });
