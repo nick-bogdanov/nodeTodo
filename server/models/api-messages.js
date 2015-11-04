@@ -10,4 +10,6 @@ ApiMessages.PASSWORD_RESET_HASH_MISMATCH = 7;
 ApiMessages.PASSWORD_RESET_EMAIL_MISMATCH = 8;
 ApiMessages.COULD_NOT_RESET_PASSWORD = 9;
 
+ApiMessages.USER_ADDED = "User was created successful";
+
 module.exports = ApiMessages;

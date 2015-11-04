@@ -18,6 +18,9 @@
         templateUrl: '/views/register',
         controller: 'RegisterController'
       })
+      .when('/confirm', {
+        templateUrl: '/views/confirm-register'
+      })
       .otherwise({
         redirectTo: '/list'
     });

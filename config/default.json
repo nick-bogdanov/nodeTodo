@@ -7,5 +7,18 @@
   "app": {
     "viewEngine": "jade",
     "port": 3000
+  },
+  "email": {
+    "transport": {
+      "service": "Gmail",
+      "auth": {
+        "user": "sukazaibala@gmail.com",
+        "pass": "nazarius777"
+      }
+    },
+    "options": {
+      "from": "Happy messenger ✔ <sukazaibala@gmail.com>"
+    }
   }
+
 }

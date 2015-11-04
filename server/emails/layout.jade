@@ -1,0 +1,19 @@
+doctype transitional
+html
+    head
+        meta(name="viewport" content="width=device-width")
+        meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+        title #{title}
+    body(bgcolor="#ffffff")
+        center
+            table.body-wrap
+                tr
+                    td
+                    td.container
+                        //- content
+                        div.content
+                            table
+                                tr
+                                    td: h2: block title
+                                tr
+                                    td: block content
