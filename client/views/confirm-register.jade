@@ -1,0 +1,15 @@
+.col-sm-4.col-sm-offset-4
+   form(name='registerForm', method='POST', novalidate)
+
+      .form-group()
+         label Email
+         input(name='email', type='email', required, placeholder='Email').form-control
+         p.help-block() Enter valid email.
+
+      .form-group()
+         label Activation code
+         input(name='token', type='text', required, placeholder='Code from email', ng-minlength='5').form-control
+
+      .form-group
+         input(type='submit').form-control.btn.btn-primary
+
