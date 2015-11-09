@@ -1,9 +1,7 @@
-(function(window, angular) {
+(function(angular) {
   'use strict';
 
-  var app = angular.module('todo', ['ngRoute']);
-
-  app.config(function($routeProvider) {
+  angular.module('todo', ['ngRoute', 'ngMdIcons', 'ngMaterial']).config(function($routeProvider, $mdThemingProvider) {
 
     $routeProvider
       .when('/list', {
@@ -16,15 +14,18 @@
       })
       .when('/register', {
         templateUrl: '/views/register',
-        controller: 'RegisterController'
+        controller: 'RegisterController',
+        controllerAs: 'vm'
       })
       .when('/confirm', {
         templateUrl: '/views/confirm-register'
       })
       .otherwise({
-        redirectTo: '/list'
+        redirectTo: '/register'
     });
+    console.log($mdThemingProvider);
+    //$mdThemingProvider.theme('default').dark();
 
-  })
+  });
 
-})(window, angular);
+})(angular);

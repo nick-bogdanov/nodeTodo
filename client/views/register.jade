@@ -1,5 +1,5 @@
 .col-sm-4.col-sm-offset-4
-   form(name='registerForm', method='POST', ng-submit='registerUser(registerForm.$valid)', novalidate)
+   form(name='registerForm', method='POST', ng-submit='vm.registerUser(registerForm.$valid)', novalidate)
       .form-group(ng-class='{"has-error": registerForm.name.$invalid && !registerForm.name.$untouched}')
          label Name
          input(name='name', ng-model='userName', required, placeholder='Username', ng-minlength='2').form-control
@@ -17,7 +17,7 @@
             | Your password too short. Minimum 5 symbols.
 
       .alert.alert-danger(ng-if='error')
-         | {{error}}
+         | {{vm.error}}
 
       .form-group
          input(type='submit', ng-disabled="registerForm.$invalid").form-control.btn.btn-primary

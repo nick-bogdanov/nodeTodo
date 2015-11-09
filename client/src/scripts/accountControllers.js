@@ -1,7 +1,9 @@
 (function(angular) {
 
-  angular.module('todo').controller('RegisterController', function($scope, users) {
-    $scope.registerUser = function(form) {
+  function RegisterCtrl($scope, users) {
+
+    this.registerUser = function(form) {
+
       if (form) {
         var data = {
           userName: $scope.userName,
@@ -9,7 +11,7 @@
           userPass: $scope.userPass
         };
 
-        $scope.error = null;
+        this.error = null;
 
         users.createUser(data).then(function(res) {
           console.log(res);
@@ -20,8 +22,15 @@
 
       }
     }
-  }).controller('LoginController', function() {
+  }
 
-  });
+  function LoginCtrl() {
+
+  }
+
+  angular.module('todo').controller('RegisterController', RegisterCtrl).controller('LoginController', LoginCtrl);
+
+  RegisterCtrl.$inject = ["$scope", "users"];
+
 
 })(angular);
