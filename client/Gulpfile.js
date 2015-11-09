@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var less = require('gulp-less');
 var jade = require('gulp-jade');
 
 gulp.task('jade', function() {
@@ -10,6 +11,14 @@ gulp.task('jade', function() {
 
 });
 
+gulp.task('less', function () {
+  return gulp.src('./styles/index.less')
+    .pipe(less({
+      paths: ["./styles/"]
+    }))
+    .pipe(gulp.dest('./dist/css'));
+});
+
 gulp.task('watch', function() {
-  gulp.watch('./views/', ['jade']);
+  gulp.watch('./styles/', ['less']);
 });

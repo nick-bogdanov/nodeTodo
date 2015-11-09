@@ -1,7 +1,7 @@
 {
   "public": {
     "views": "../client/views",
-    "static": "/../client/src/"
+    "static": "/../client/"
   },
   "db": "mongodb://localhost:27017/nodetodo",
   "app": {
